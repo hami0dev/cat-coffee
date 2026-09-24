@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cat House | Coffee Shop</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Fredoka:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+:root {
+    --brown-dark: #3b2417;
+    --brown-medium: #6b4423;
+    --brown-light: #a67c52;
+    --caramel: #d4a373;
+    --beige: #f4e4d0;
+    --beige-light: #faf3e8;
+    --cream: #fffaf0;
+    --grey: #8b8680;
+    --gold: #c9a961;
+    --gold-dark: #a8863f;
+    --paw-pink: #e8a0a0;
+    --text: #3b2417;
+    --muted: #7a6354;
+    --card: #fffefb;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: 'Cairo', sans-serif;
+    color: var(--text);
+    background:
+        radial-gradient(circle at 20% 15%, rgba(212, 163, 115, 0.20), transparent 45%),
+        radial-gradient(circle at 85% 85%, rgba(107, 68, 35, 0.28), transparent 50%),
+        linear-gradient(135deg, #2b1a0f 0%, #4a2c18 50%, #2b1a0f 100%);
+    background-attachment: fixed;
+    padding-bottom: 70px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.08;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.9) 1px, transparent 1px);
+    background-size: 26px 26px;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    width: 650px;
+    height: 650px;
+    border-radius: 50%;
+    top: -280px;
+    right: -280px;
+    background: radial-gradient(circle, rgba(201, 169, 97, 0.25), transparent 70%);
+    pointer-events: none;
+    filter: blur(50px);
+}
+
+.container {
+    width: min(1180px, calc(100% - 24px));
+    margin: 30px auto;
+    padding: 40px 32px;
+    background: rgba(255, 250, 240, 0.97);
+    border: 1px solid rgba(201, 169, 97, 0.35);
+    border-radius: 32px;
+    box-shadow:
+        0 30px 80px rgba(59, 36, 23, 0.45),
+        0 0 0 1px rgba(107, 68, 35, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    position: relative;
+    z-index: 1;
+}
+
+.container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 130px;
+    height: 3px;
+    border-radius: 0 0 99px 99px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+/* ===== HEADER ===== */
+header {
+    text-align: center;
+    padding: 8px 10px 30px;
+    position: relative;
+}
+
+.logo-mark {
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 20px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #fffaf0, #f4e4d0 55%, #d4a373);
+    border: 2px solid var(--gold);
+    box-shadow:
+        0 15px 45px rgba(107, 68, 35, 0.30),
+        0 0 0 8px rgba(255, 255, 255, 0.75),
+        0 0 0 9px rgba(201, 169, 97, 0.40);
+    padding: 14px;
+    position: relative;
+    animation: logoFloat 6s ease-in-out infinite;
+}
+
+.logo-mark svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 4px 10px rgba(59, 36, 23, 0.22));
+}
+
+.logo-mark::before {
+    content: "";
+    position: absolute;
+    inset: -24px;
+    border-radius: 50%;
+    border: 1.5px dashed rgba(201, 169, 97, 0.55);
+    animation: rotateSlow 45s linear infinite;
+}
+
+.logo-mark::after {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 14px rgba(201, 169, 97, 0.95);
+}
+
+@keyframes rotateSlow {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+@keyframes logoFloat {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-6px); }
+}
+
+/* اسم المحل */
+.brand-name {
+    margin: 0;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    letter-spacing: 1px;
+    background: linear-gradient(135deg, var(--brown-dark) 0%, var(--brown-medium) 50%, var(--gold-dark) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1.1;
+}
+
+.brand-name .amp {
+    color: var(--gold-dark);
+    -webkit-text-fill-color: var(--gold-dark);
+    font-weight: 500;
+    margin: 0 4px;
+}
+
+.brand-name span {
+    display: block;
+    font-size: 0.9rem;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 8px;
+    color: var(--gold-dark);
+    -webkit-text-fill-color: var(--gold-dark);
+    margin-top: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.subtitle {
+    margin: 16px 0 0;
+    color: var(--muted);
+    font-size: 1rem;
+    font-style: italic;
+    letter-spacing: .5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.subtitle i {
+    color: var(--brown-light);
+    font-size: 0.9em;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin: 22px auto 0;
+    max-width: 360px;
+}
+
+.divider-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.divider-icon {
+    width: 24px;
+    height: 24px;
+    color: var(--brown-medium);
+}
+
+/* ===== FILTER BUTTONS ===== */
+.filter-buttons {
+    position: sticky;
+    top: 12px;
+    z-index: 20;
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    margin: 0 auto 34px;
+    padding: 12px;
+    background: rgba(255, 250, 240, 0.94);
+    border: 1px solid rgba(201, 169, 97, 0.30);
+    border-radius: 22px;
+    backdrop-filter: blur(14px);
+    box-shadow: 0 8px 24px rgba(107, 68, 35, 0.10);
+    max-width: 600px;
+}
+
+.filter-buttons button {
+    flex: 1;
+    min-width: 0;
+    border: 1.5px solid transparent;
+    border-radius: 14px;
+    padding: 14px 20px;
+    background: transparent;
+    color: var(--brown-dark);
+    cursor: pointer;
+    font-family: 'Cairo', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all .3s cubic-bezier(.4, 0, .2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.filter-buttons button i {
+    font-size: 1.05em;
+}
+
+.filter-buttons button:hover {
+    background: rgba(212, 163, 115, 0.15);
+}
+
+.filter-buttons button.active {
+    background: linear-gradient(135deg, var(--brown-medium), var(--brown-dark));
+    color: #fff;
+    border-color: var(--brown-dark);
+    box-shadow: 0 10px 24px rgba(107, 68, 35, 0.35);
+    transform: translateY(-1px);
+}
+
+/* ===== MENU GRID ===== */
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 26px;
+    scroll-margin-top: 110px;
+}
+
+.menu-item {
+    overflow: hidden;
+    background: var(--card);
+    border: 1px solid rgba(201, 169, 97, 0.22);
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(59, 36, 23, .10);
+    transition: transform .35s cubic-bezier(.4, 0, .2, 1), box-shadow .35s ease;
+    position: relative;
+}
+
+.menu-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px rgba(107, 68, 35, .22);
+}
+
+.menu-item::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    padding: 1px;
+    background: linear-gradient(135deg, transparent 30%, rgba(201, 169, 97, 0.6), transparent 70%);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .35s ease;
+    z-index: 2;
+}
+
+.menu-item:hover::before {
+    opacity: 1;
+}
+
+.menu-item-img-wrap {
+    position: relative;
+    overflow: hidden;
+}
+
+.menu-item img {
+    display: block;
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    transition: transform .8s ease;
+}
+
+.menu-item:hover img {
+    transform: scale(1.06);
+}
+
+.menu-item-img-wrap::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--caramel), var(--brown-medium), var(--caramel));
+}
+
+/* شارة كف القط على الصورة */
+.paw-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(255, 250, 240, 0.92);
+    border: 1.5px solid var(--gold);
+    display: grid;
+    place-items: center;
+    box-shadow: 0 6px 16px rgba(59, 36, 23, 0.20);
+    z-index: 3;
+}
+
+.paw-badge svg {
+    width: 20px;
+    height: 20px;
+    color: var(--brown-medium);
+}
+
+.menu-info {
+    padding: 20px 20px 22px;
+    background: linear-gradient(180deg, transparent, rgba(212, 163, 115, 0.12));
+    position: relative;
+}
+
+.menu-info h3 {
+    margin: 0;
+    font-family: 'Fredoka', 'Cairo', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--brown-dark);
+    direction: ltr;
+    text-align: left;
+    letter-spacing: .3px;
+}
+
+.menu-info p {
+    margin: 8px 0 0;
+    color: var(--muted);
+    font-size: .93rem;
+    line-height: 1.5;
+}
+
+.menu-price {
+    display: inline-block;
+    margin-top: 14px;
+    padding: 7px 16px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color: #fff;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    font-size: .9rem;
+    direction: ltr;
+    letter-spacing: .5px;
+    box-shadow: 0 6px 16px rgba(168, 134, 63, .35);
+    position: relative;
+}
+
+.menu-price::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 999px;
+    background: linear-gradient(180deg, rgba(255,255,255,.25), transparent);
+    pointer-events: none;
+}
+
+.empty {
+    grid-column: 1 / -1;
+    padding: 40px 15px;
+    text-align: center;
+    color: var(--muted);
+    font-style: italic;
+}
+
+/* ===== INSTAGRAM FOLLOW ===== */
+#follow-message {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    background: linear-gradient(135deg, var(--brown-medium), var(--brown-dark));
+    color: #fff;
+    padding: 15px 18px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(59, 36, 23, 0.50);
+    border: 1px solid rgba(201, 169, 97, 0.55);
+    z-index: 1000;
+    max-width: 330px;
+    font-family: 'Cairo', sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    backdrop-filter: blur(10px);
+    animation: slideUp 0.6s ease-out;
+}
+
+#follow-message i.fab.fa-instagram {
+    color: var(--gold);
+    font-size: 26px;
+}
+
+#follow-message a {
+    color: var(--caramel);
+    text-decoration: none;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: color .2s ease;
+}
+
+#follow-message a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+#follow-message #close-follow {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 0;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform .3s ease;
+}
+
+#follow-message #close-follow:hover {
+    transform: scale(1.25) rotate(90deg);
+}
+
+/* ===== DEVELOPER CREDIT ===== */
+#dev-credit {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    padding: 12px 20px;
+    text-align: center;
+    background: linear-gradient(90deg, var(--brown-dark), var(--brown-medium), var(--brown-dark));
+    color: #fff;
+    font-family: 'Cairo', sans-serif;
+    font-size: 13px;
+    letter-spacing: .3px;
+    border-top: 1px solid var(--gold);
+    box-shadow: 0 -6px 20px rgba(59, 36, 23, 0.40);
+}
+
+#dev-credit i.fa-heart {
+    color: var(--paw-pink);
+    margin-left: 6px;
+    animation: heartbeat 1.4s ease-in-out infinite;
+    display: inline-block;
+}
+
+#dev-credit a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    transition: color .2s ease, text-shadow .2s ease;
+}
+
+#dev-credit a:hover {
+    color: var(--caramel);
+    text-shadow: 0 0 10px rgba(212, 163, 115, 0.8);
+    text-decoration: underline;
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.18); }
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    #follow-message {
+        left: 14px;
+        right: 14px;
+        max-width: none;
+        bottom: 70px;
+    }
+    #dev-credit {
+        font-size: 11.5px;
+        padding: 10px 12px;
+    }
+}
+
+@media (max-width: 600px) {
+    .container {
+        width: calc(100% - 12px);
+        margin: 8px auto;
+        padding: 22px 14px 26px;
+        border-radius: 24px;
+    }
+    header { padding-bottom: 20px; }
+    .logo-mark {
+        width: 115px;
+        height: 115px;
+        padding: 12px;
+    }
+    .brand-name { letter-spacing: 0; }
+    .brand-name span { letter-spacing: 5px; font-size: 0.75rem; }
+    .subtitle { font-size: .88rem; }
+    .filter-buttons {
+        top: 6px;
+        gap: 8px;
+        margin-bottom: 22px;
+        padding: 8px;
+    }
+    .filter-buttons button {
+        padding: 11px 8px;
+        font-size: .88rem;
+    }
+    .menu-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        scroll-margin-top: 85px;
+    }
+    .menu-item img { height: 220px; }
+    .menu-info h3 { font-size: 1.1rem; }
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+    <header>
+        <!-- 🐱 شعار Cat House: قطة + كعكة -->
+        <div class="logo-mark">
+            <svg viewBox="0 0 130 130" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="catFur" x1="30%" y1="20%" x2="70%" y2="90%">
+                        <stop offset="0%" stop-color="#a67c52"/>
+                        <stop offset="50%" stop-color="#6b4423"/>
+                        <stop offset="100%" stop-color="#3b2417"/>
+                    </linearGradient>
+                    <linearGradient id="catFurLight" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#d4a373"/>
+                        <stop offset="100%" stop-color="#a67c52"/>
+                    </linearGradient>
+                    <linearGradient id="cakeBase" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#f4e4d0"/>
+                        <stop offset="100%" stop-color="#e8cfb0"/>
+                    </linearGradient>
+                    <linearGradient id="cakeFrost" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#ffd7d7"/>
+                        <stop offset="100%" stop-color="#e8a0a0"/>
+                    </linearGradient>
+                    <linearGradient id="goldGradCat" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#e5c896"/>
+                        <stop offset="50%" stop-color="#c9a961"/>
+                        <stop offset="100%" stop-color="#a8863f"/>
+                    </linearGradient>
+                    <radialGradient id="eyeGlow" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#fff6d5"/>
+                        <stop offset="100%" stop-color="#c9a961"/>
+                    </radialGradient>
+                </defs>
+
+                <!-- هالة خلفية خفيفة -->
+                <circle cx="65" cy="62" r="52" fill="#f4e4d0" opacity="0.5"/>
+
+                <!-- ذيل القط (خلف الجسم) -->
+                <path d="M92,88 Q108,82 106,68 Q105,60 98,62 Q94,64 96,72 Q97,80 88,84 Z"
+                      fill="url(#catFur)" opacity="0.9"/>
+
+                <!-- جسم القط (جاثم) -->
+                <path d="M32,90 Q28,78 34,70 Q42,62 52,64 L78,64 Q88,62 96,70 Q100,78 96,90 Q96,96 88,98 L40,98 Q32,96 32,90 Z"
+                      fill="url(#catFur)"/>
+
+                <!-- بطن فاتح -->
+                <ellipse cx="64" cy="88" rx="20" ry="8" fill="url(#catFurLight)" opacity="0.55"/>
+
+                <!-- رأس القط -->
+                <ellipse cx="64" cy="52" rx="26" ry="24" fill="url(#catFur)"/>
+
+                <!-- الأذن اليسرى -->
+                <path d="M42,38 L38,20 L54,32 Z" fill="url(#catFur)"/>
+                <path d="M44,36 L42,26 L52,33 Z" fill="#e8a0a0" opacity="0.75"/>
+
+                <!-- الأذن اليمنى -->
+                <path d="M86,38 L90,20 L74,32 Z" fill="url(#catFur)"/>
+                <path d="M84,36 L86,26 L76,33 Z" fill="#e8a0a0" opacity="0.75"/>
+
+                <!-- وجه القط - منطقة الفم -->
+                <ellipse cx="64" cy="58" rx="16" ry="13" fill="url(#catFurLight)" opacity="0.75"/>
+
+                <!-- العيون -->
+                <ellipse cx="54" cy="50" rx="5" ry="6" fill="url(#eyeGlow)"/>
+                <ellipse cx="74" cy="50" rx="5" ry="6" fill="url(#eyeGlow)"/>
+                <ellipse cx="54" cy="50" rx="2" ry="5" fill="#3b2417"/>
+                <ellipse cx="74" cy="50" rx="2" ry="5" fill="#3b2417"/>
+                <!-- لمعة العين -->
+                <circle cx="55.5" cy="48" r="1.2" fill="#ffffff" opacity="0.95"/>
+                <circle cx="75.5" cy="48" r="1.2" fill="#ffffff" opacity="0.95"/>
+
+                <!-- الأنف -->
+                <path d="M62,57 L66,57 L64,60 Z" fill="#e8a0a0"/>
+
+                <!-- الفم (شكل ω) -->
+                <path d="M58,62 Q61,65 64,62 Q67,65 70,62"
+                      stroke="#3b2417" stroke-width="1.1" fill="none" stroke-linecap="round" opacity="0.85"/>
+
+                <!-- شوارب -->
+                <path d="M42,58 L34,56" stroke="#3b2417" stroke-width="0.8" opacity="0.55" stroke-linecap="round"/>
+                <path d="M42,62 L34,63" stroke="#3b2417" stroke-width="0.8" opacity="0.55" stroke-linecap="round"/>
+                <path d="M86,58 L94,56" stroke="#3b2417" stroke-width="0.8" opacity="0.55" stroke-linecap="round"/>
+                <path d="M86,62 L94,63" stroke="#3b2417" stroke-width="0.8" opacity="0.55" stroke-linecap="round"/>
+
+                <!-- الكعكة أمام القط -->
+                <g transform="translate(64, 92)">
+                    <!-- القاعدة -->
+                    <path d="M-14,0 L14,0 L12,12 L-12,12 Z" fill="url(#cakeBase)"/>
+                    <line x1="-9" y1="0" x2="-8" y2="12" stroke="#a8863f" stroke-width="0.5" opacity="0.5"/>
+                    <line x1="-3" y1="0" x2="-3" y2="12" stroke="#a8863f" stroke-width="0.5" opacity="0.5"/>
+                    <line x1="3" y1="0" x2="3" y2="12" stroke="#a8863f" stroke-width="0.5" opacity="0.5"/>
+                    <line x1="9" y1="0" x2="8" y2="12" stroke="#a8863f" stroke-width="0.5" opacity="0.5"/>
+                    <!-- الكريمة -->
+                    <path d="M-14,0 C-14,-7 -8,-11 0,-11 C8,-11 14,-7 14,0 Z" fill="url(#cakeFrost)"/>
+                    <path d="M-10,0 C-10,-4 -5,-7 0,-7 C5,-7 10,-4 10,0 Z" fill="#ffeaea"/>
+                    <!-- الكرزة -->
+                    <circle cx="0" cy="-13" r="2.6" fill="#ad1457"/>
+                    <ellipse cx="-0.7" cy="-13.7" rx="0.8" ry="0.6" fill="#ffffff" opacity="0.7"/>
+                </g>
+
+                <!-- خطوط ذهبية زخرفية -->
+                <circle cx="22" cy="30" r="1.5" fill="url(#goldGradCat)" opacity="0.9"/>
+                <circle cx="108" cy="30" r="1.5" fill="url(#goldGradCat)" opacity="0.9"/>
+                <circle cx="18" cy="80" r="1" fill="url(#goldGradCat)" opacity="0.7"/>
+                <circle cx="112" cy="80" r="1" fill="url(#goldGradCat)" opacity="0.7"/>
+                <circle cx="65" cy="14" r="1.3" fill="url(#goldGradCat)" opacity="0.85"/>
+            </svg>
+        </div>
+
+        <h1 class="brand-name">
+            Cat House <span class="amp">|</span> Coffee Shop
+            <span>Pâtisserie · Coffee · Cats</span>
+        </h1>
+
+        <p class="subtitle">
+            <i class="fas fa-cake-candles"></i>
+            حلويات طازجة
+            <span style="color: var(--caramel);">•</span>
+            <i class="fas fa-mug-hot"></i>
+            قهوة مختصة
+            <span style="color: var(--caramel);">•</span>
+            <i class="fas fa-cat"></i>
+            قطط لطيفة
+        </p>
+
+        <div class="divider">
+            <span class="divider-line"></span>
+            <svg class="divider-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <!-- كف قط -->
+                <ellipse cx="12" cy="15" rx="5" ry="4.5"/>
+                <ellipse cx="7" cy="9.5" rx="2" ry="2.5"/>
+                <ellipse cx="11" cy="7.5" rx="2" ry="2.5"/>
+                <ellipse cx="15.5" cy="8" rx="2" ry="2.5"/>
+                <ellipse cx="18.5" cy="11" rx="1.8" ry="2.3"/>
+            </svg>
+            <span class="divider-line"></span>
+        </div>
+    </header>
+
+    <div class="filter-buttons">
+        <button class="active" data-type="coffee">
+            <i class="fas fa-mug-hot"></i>
+            المشروبات
+        </button>
+        <button data-type="dessert">
+            <i class="fas fa-cake-candles"></i>
+            الحلويات
+        </button>
+    </div>
+
+    <div class="menu-grid" id="menu-grid"></div>
+
+</div>
+
+<!-- ===== رسالة الإنستغرام ===== -->
+<div id="follow-message">
+    <div style="font-size: 20px;">
+        <i class="fab fa-instagram"></i>
+    </div>
+    <div style="flex: 1; text-align: right;">
+        <div style="font-size: 12px; font-weight: bold; margin-bottom: 5px;">
+            تابعونا على الإنستغرام 🌸
+        </div>
+        <a href="https://www.instagram.com/cat_house.dz" target="_blank">
+            <span>@cat_house.dz</span>
+            <i class="fas fa-external-link-alt" style="font-size: 10px;"></i>
+        </a>
+    </div>
+    <button id="close-follow" title="إغلاق">×</button>
+</div>
+
+<!-- ===== شريط الحقوق ===== -->
+<div id="dev-credit">
+    <i class="fas fa-heart"></i>
+    Developed By
+    <a href="https://www.instagram.com/hami_mma/" target="_blank">@Hami</a>
+</div>
+
+<script>
+/* ============================================================
+   Cat House | Coffee Shop - Menu
+   - category: "coffee"  للمشروبات
+   - category: "dessert" للحلويات
+   ============================================================ */
+
+const menuItems = [
+
+    /* ========== ☕ المشروبات ========== */
+
+    /* --- القهوة الساخنة --- */
+    {name: "Single Espresso", category: "coffee", price: "8 Dinar", image: "https://brot.ae/cdn/shop/files/Single_Espresso.webp?v=1745579527", description: "إسبريسو سنجل"},
+    {name: "Double Espresso", category: "coffee", price: "12 Dinar", image: "https://brot.ae/cdn/shop/files/double-espresso-side-view-Photoroom_450x450.jpg?v=1745579487", description: "إسبريسو دبل"},
+    {name: "Americano", category: "coffee", price: "7 Dinar", image: "https://cdn.shopify.com/s/files/1/0669/0966/7619/files/americano-coffee-in-white-cup-crema-on-wood-table-wrexham-bean.webp?v=1745258094", description: "أمريكانو"},
+    {name: "Cappuccino (M)", category: "coffee", price: "15 Dinar", image: "https://smallcakesbakery.com/wp-content/uploads/2024/01/capuccino.png", description: "كابتشينو وسط"},
+    {name: "Cappuccino (L)", category: "coffee", price: "22 Dinar", image: "https://media-cdn.tripadvisor.com/media/photo-s/12/4f/61/57/huge-cappuccino.jpg", description: "كابتشينو كبير"},
+    {name: "Latte (M)", category: "coffee", price: "15 Dinar", image: "https://sleepyowl.co/cdn/shop/files/YHF02067_19_2_-min.jpg?v=1661156583", description: "لاتيه وسط"},
+    {name: "Latte (L)", category: "coffee", price: "18 Dinar", image: "https://staresso.com/cdn/shop/articles/What_is_a_latte.jpg?v=1716606481", description: "لاتيه كبير"},
+    {name: "Flat White", category: "coffee", price: "15 Dinar", image: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/flat-white-d8ada0f.jpg", description: "فلات وايت"},
+    {name: "Cortado", category: "coffee", price: "10 Dinar", image: "https://cdn.shopify.com/s/files/1/0801/7530/0936/files/WK_Social_10062022_4_2048x2048.png?v=1711995048", description: "كورتادو"},
+    {name: "Spanish Latte (M)", category: "coffee", price: "15 Dinar", image: "https://www.homegrounds.co/wp-content/uploads/2022/07/spanish-latte--1200x900.jpeg", description: "لاتيه إسباني وسط"},
+    {name: "Spanish Latte (L)", category: "coffee", price: "18 Dinar", image: "https://brewthatcoffee.com/wp-content/uploads/2024/03/spanish-latte.png", description: "لاتيه إسباني كبير"},
+    {name: "Turkish Coffee", category: "coffee", price: "10 Dinar", image: "https://livingthegourmet.com/wp-content/uploads/2022/08/Traditional-Turkish-Coffee-11.jpg", description: "قهوة تركية"},
+    {name: "Dark Mocha", category: "coffee", price: "15 Dinar", image: "https://samhancloud.com/wp-content/uploads/2022/06/DSC08693.jpg", description: "موكا دارك"},
+    {name: "White Mocha", category: "coffee", price: "15 Dinar", image: "https://bakingmischief.com/wp-content/uploads/2018/04/homemade-white-chocolate-mocha-image-square.jpg", description: "موكا وايت"},
+    {name: "Hot Chocolate", category: "coffee", price: "18 Dinar", image: "https://images.unsplash.com/photo-1542990253-a781e04c0082?w=800", description: "شوكولاتة ساخنة"},
+
+    /* --- المشروبات الباردة --- */
+    {name: "Iced Latte", category: "coffee", price: "18 Dinar", image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=800", description: "آيس لاتيه"},
+    {name: "Iced Mocha", category: "coffee", price: "20 Dinar", image: "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=800", description: "آيس موكا"},
+    {name: "Iced Spanish Latte", category: "coffee", price: "20 Dinar", image: "https://images.unsplash.com/photo-1592663527359-cf6642f54cff?w=800", description: "آيس سبانش لاتيه"},
+    {name: "Fresh Orange Juice", category: "coffee", price: "15 Dinar", image: "https://images.unsplash.com/photo-1613478223719-2ab802602423?w=800", description: "عصير برتقال طازج"},
+
+    /* --- الشاي والأعشاب --- */
+    {name: "Moroccan Tea", category: "coffee", price: "25 Dinar", image: "https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=800", description: "شاي مغربي"},
+    {name: "Black Tea", category: "coffee", price: "5 Dinar", image: "https://shamlola.s3.amazonaws.com/Shamlola_Images/3/src/feb4c042a95017f45d9f197ba0941b307fd09f77.jpg", description: "شاي أحمر"},
+    {name: "Green Tea", category: "coffee", price: "5 Dinar", image: "https://roguecommunityhealth.org/wp-content/uploads/2024/09/benefits-green-tea-scaled.webp", description: "شاي أخضر"},
+    {name: "Hibiscus Tea", category: "coffee", price: "5 Dinar", image: "https://vid.alarabiya.net/images/2021/07/30/467e02bf-010c-439a-97ac-bed4afc627e7/467e02bf-010c-439a-97ac-bed4afc627e7.jpg?crop=1:1&width=1000", description: "كركديه"},
+
+    /* ========== 🧁 الحلويات ========== */
+    {name: "Cheesecake", category: "dessert", price: "25 Dinar", image: "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=800", description: "تشيز كيك"},
+    {name: "Chocolate Cake", category: "dessert", price: "22 Dinar", image: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800", description: "كيك شوكولاتة"},
+    {name: "Tiramisu", category: "dessert", price: "25 Dinar", image: "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=800", description: "تيراميسو"},
+    {name: "Red Velvet Cake", category: "dessert", price: "28 Dinar", image: "https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?w=800", description: "ريد فيلفيت"},
+    {name: "Carrot Cake", category: "dessert", price: "22 Dinar", image: "https://images.unsplash.com/photo-1621303837174-89787a7d4729?w=800", description: "كيك الجزر"},
+    {name: "Croissant", category: "dessert", price: "12 Dinar", image: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=800", description: "كرواسون"},
+    {name: "Chocolate Croissant", category: "dessert", price: "15 Dinar", image: "https://images.unsplash.com/photo-1623334044303-241021148842?w=800", description: "كرواسون شوكولاتة"},
+    {name: "Donut", category: "dessert", price: "10 Dinar", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=800", description: "دونات"},
+    {name: "Muffin", category: "dessert", price: "12 Dinar", image: "https://images.unsplash.com/photo-1607958996333-41aef7caefaa?w=800", description: "مافن"},
+    {name: "Macarons (Box)", category: "dessert", price: "30 Dinar", image: "https://images.unsplash.com/photo-1569864358642-9d1684040f43?w=800", description: "ماكرون"},
+    {name: "Brownie", category: "dessert", price: "18 Dinar", image: "https://images.unsplash.com/photo-1607920591413-4ec007e70023?w=800", description: "براوني"},
+    {name: "Ice Cream (2 Scoops)", category: "dessert", price: "15 Dinar", image: "https://images.unsplash.com/photo-1567206563064-6f60f40a2b57?w=800", description: "آيس كريم بولا"},
+    {name: "Waffle", category: "dessert", price: "20 Dinar", image: "https://images.unsplash.com/photo-1562376552-0d160a2f238d?w=800", description: "وافل"},
+    {name: "Cupcake", category: "dessert", price: "12 Dinar", image: "https://images.unsplash.com/photo-1614707267537-b85aaf00c4b7?w=800", description: "كب كيك"},
+    {name: "Cinnamon Roll", category: "dessert", price: "15 Dinar", image: "https://images.unsplash.com/photo-1509365465985-25d11c17e812?w=800", description: "سينامون رول"},
+    {name: "Apple Pie", category: "dessert", price: "20 Dinar", image: "https://images.unsplash.com/photo-1535920527002-b35e96722eb9?w=800", description: "فطيرة التفاح"}
+
+];
+
+const menuGrid = document.getElementById('menu-grid');
+const filterButtons = document.querySelectorAll('.filter-buttons button');
+
+const pawSVG = `
+<svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="12" cy="15" rx="5" ry="4.5"/>
+    <ellipse cx="7" cy="9.5" rx="2" ry="2.5"/>
+    <ellipse cx="11" cy="7.5" rx="2" ry="2.5"/>
+    <ellipse cx="15.5" cy="8" rx="2" ry="2.5"/>
+    <ellipse cx="18.5" cy="11" rx="1.8" ry="2.3"/>
+</svg>`;
+
+function displayMenu(items) {
+    menuGrid.innerHTML = '';
+    items = items.filter(item => item.name && item.name.trim() !== '');
+    if (!items.length) {
+        menuGrid.innerHTML = '<div class="empty">لا توجد منتجات في هذا القسم حالياً.</div>';
+        return;
+    }
+    items.forEach(item => {
+        const div = document.createElement('div');
+        div.classList.add('menu-item');
+        div.innerHTML = `
+            <div class="menu-item-img-wrap">
+                <img src="${item.image}" alt="${item.name}" loading="lazy"
+                     onerror="this.src='https://via.placeholder.com/400x240/6b4423/ffffff?text=Cat+House'">
+                <div class="paw-badge">${pawSVG}</div>
+            </div>
+            <div class="menu-info">
+                <h3>${item.name}</h3>
+                <p>${item.description || ''}</p>
+                <div class="menu-price">${item.price}</div>
+            </div>
+        `;
+        menuGrid.appendChild(div);
+    });
+}
+
+function filterMenu(type) {
+    displayMenu(menuItems.filter(item => item.category === type));
+}
+
+filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const type = btn.getAttribute('data-type');
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        filterMenu(type);
+        setTimeout(() => {
+            const firstItem = menuGrid.querySelector('.menu-item');
+            if (firstItem) {
+                const offset = window.innerWidth <= 600 ? 88 : 110;
+                const position = firstItem.getBoundingClientRect().top + window.pageYOffset - offset;
+                window.scrollTo({ top: position, behavior: 'smooth' });
+            }
+        }, 50);
+    });
+});
+
+filterMenu('coffee');
+
+const closeFollow = document.getElementById('close-follow');
+if (closeFollow) {
+    closeFollow.addEventListener('click', function () {
+        const msg = document.getElementById('follow-message');
+        msg.style.transition = 'opacity .4s, transform .4s';
+        msg.style.opacity = '0';
+        msg.style.transform = 'translateY(40px)';
+        setTimeout(() => { msg.style.display = 'none'; }, 400);
+    });
+}
+</script>
+
+</body>
+</html>
